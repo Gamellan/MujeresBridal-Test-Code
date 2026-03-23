@@ -1,0 +1,30 @@
+{
+  "patterns": [
+    {
+      "slug": "floral-vine-lace",
+      "name": "Floral Vine Lace",
+      "description": {
+        "short": "Flowing vine motif with soft floral blooms for romantic silhouettes.",
+        "full": "<h2>Pattern Profile</h2><ul><li><strong>Motif:</strong> Continuous vine and petal clusters</li><li><strong>Best For:</strong> Sleeves, overlays, and fitted bodices</li><li><strong>Visual Mood:</strong> Romantic and delicate</li></ul><h2>Notes</h2><ul><li>Pairs beautifully with matte satin linings</li><li>Works well with pearl or clear bead accents</li></ul>"
+      },
+      "images": [
+        "lace-patterns/floral-vine-lace.svg"
+      ],
+      "cover": "lace-patterns/floral-vine-lace.svg",
+      "tags": ["romantic", "floral", "soft"]
+    },
+    {
+      "slug": "geo-chantilly-lace",
+      "name": "Geo Chantilly Lace",
+      "description": {
+        "short": "A cleaner geometric lace look for modern bridal styling.",
+        "full": "<h2>Pattern Profile</h2><ul><li><strong>Motif:</strong> Geometric mesh with tiny blossom nodes</li><li><strong>Best For:</strong> Structured bodices and clean A-line gowns</li><li><strong>Visual Mood:</strong> Modern and polished</li></ul><h2>Notes</h2><ul><li>Looks sharp with minimal seams</li><li>Great option for contemporary bridal direction</li></ul>"
+      },
+      "images": [
+        "lace-patterns/geo-chantilly-lace.svg"
+      ],
+      "cover": "lace-patterns/geo-chantilly-lace.svg",
+      "tags": ["modern", "clean", "structured"]
+    }
+  ]
+}

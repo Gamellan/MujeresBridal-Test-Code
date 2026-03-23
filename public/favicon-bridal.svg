@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mujeres Bridal favicon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8f6f3"/>
+      <stop offset="100%" stop-color="#efe8df"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d3b18f"/>
+      <stop offset="100%" stop-color="#c59a6d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <circle cx="32" cy="32" r="23" fill="none" stroke="url(#gold)" stroke-width="2.6"/>
+
+  <path d="M20 43V21h3.6l8.4 12 8.4-12H44v22h-3.6V27.2L32 38.9h-.1l-8.3-11.7V43z" fill="#1f1b16"/>
+  <path d="M18.5 18.5C24 12.2 40 12.2 45.5 18.5" fill="none" stroke="#d3b18f" stroke-width="2" stroke-linecap="round"/>
+  <path d="M22 48.5h20" stroke="#5f554a" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

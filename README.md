@@ -1,6 +1,11 @@
 # Mujeres Bridal Catalog
 
-Simple, elegant bridal dress catalog for Mujeres Bridal. Built with Vite (vanilla JS) and hosted on GitHub Pages. All content is data-driven from the `public/catalog/` folder structure.
+Simple, elegant bridal website for Mujeres Bridal. Built with Vite (vanilla JS) and hosted on GitHub Pages.
+
+The site has 3 sections:
+- `Catalog` for available gowns
+- `Gown Inspo` for concept pieces
+- `Lace Patterns` for fabric pattern swatches
 
 **No admin panel. No database. Just beautiful dresses.**
 
@@ -11,7 +16,7 @@ Simple, elegant bridal dress catalog for Mujeres Bridal. Built with Vite (vanill
    npm install
    ```
 
-2. **Add a dress:**
+2. **Add catalog dresses:**
    - Create folder: `public/catalog/my-dress-name/`
    - Drop images inside (JPG, PNG, WebP, AVIF, SVG)
    - Optionally add `meta.json` with name, price, description, flags
@@ -31,7 +36,19 @@ Simple, elegant bridal dress catalog for Mujeres Bridal. Built with Vite (vanill
    ```bash
    npm run build
    ```
-   Commit and push. GitHub Pages auto-deploys.
+   Commit and push. GitHub Pages auto-deploys from `docs/`.
+
+## Content Data Files
+
+- `public/catalog-data.json` -> `Catalog`
+- `public/ideas-data.json` -> `Gown Inspo`
+- `public/lace-patterns-data.json` -> `Lace Patterns`
+
+You can edit `ideas-data.json` and `lace-patterns-data.json` manually to add, remove, or update entries.
+
+Use image paths like these in JSON:
+- Gown inspo image: `ideas/idea-modern-minimal.svg`
+- Lace pattern image: `lace-patterns/floral-vine-lace.svg`
 
 ## Development Workflow (Recommended)
 
@@ -121,7 +138,7 @@ Recommended: WebP for photos, SVG for illustrations. Optimize images before addi
 
 ```bash
 npm run dev          # Start Vite dev server
-npm run build        # Build static site to docs/
+npm run build        # Build static site to docs/ (runs generate automatically via prebuild)
 npm run generate     # Regenerate catalog-data.json from public/catalog/
 npm run watch        # Watch public/catalog and auto-regenerate
 ```
@@ -145,6 +162,7 @@ The app automatically adds a timestamp to catalog fetches (`?t=...`), so users a
 ## Features
 
 - **Responsive grid** – Auto-layouts on mobile, tablet, desktop
+- **Three content sections** – Catalog, Gown Inspo, Lace Patterns
 - **Catalog filters** – By ready-to-wear, made-to-order, for sale, for rent
 - **Detail view** – Click dress card to see full gallery
 - **Image gallery:**
@@ -168,7 +186,7 @@ Perfect for a bridal aesthetic.
 
 **Catalog not updating:**
 - Run `npm run generate` to rebuild from `public/catalog/`
-- Run `npm run build` to update `docs/`
+- Run `npm run build` to update `docs/` (also runs generate)
 - Push to GitHub; Pages should update within 1 min
 - Hard refresh browser if needed
 
@@ -186,15 +204,16 @@ Perfect for a bridal aesthetic.
 ```
 .
 ├── public/
+│   ├── favicon-bridal.svg
 │   ├── logo.png
-│   └── catalog/              # Add dresses here
-│       ├── dress-1/
-│       │   ├── image.jpg
-│       │   └── meta.json
-│       └── dress-2/
-│           └── image.png
+│   ├── catalog-data.json
+│   ├── ideas-data.json
+│   ├── lace-patterns-data.json
+│   ├── catalog/              # Catalog dress folders
+│   ├── ideas/                # Gown inspo images
+│   └── lace-patterns/        # Lace swatch images
 ├── src/
-│   ├── main.js              # App logic
+│   ├── main.js              # App logic for all three sections
 │   └── style.css            # Styles
 ├── docs/                    # GitHub Pages output
 ├── scripts/

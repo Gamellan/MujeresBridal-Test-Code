@@ -5,6 +5,7 @@ const app = document.querySelector("#app");
 const state = {
   dresses: [],
   ideas: [],
+  lacePatterns: [],
   filters: {
     readyToWear: false,
     madeToOrder: false,
@@ -26,7 +27,7 @@ const formatPrice = (price, currency = "PHP") => {
 };
 
 const getPriceDisplay = (item) => {
-  if (item.type === "idea") {
+  if (item.type === "idea" || item.type === "lacePattern") {
     return {
       type: "none",
       value: ""
@@ -84,10 +85,23 @@ const getHeroHTML = () => {
     return `
       <section class="hero">
         <div class="hero__card">
-          <div class="hero__badge">Ideas</div>
+          <div class="hero__badge">Gown Inspo</div>
           <p class="hero__metric">Concepts in progress</p>
           <p class="hero__desc">A creative board of gowns we have designed but not yet produced.</p>
           <p class="hero__desc">Explore silhouettes, fabrics, and styling direction for upcoming Mujeres collections.</p>
+        </div>
+      </section>
+    `;
+  }
+
+  if (state.currentSection === "lacePatterns") {
+    return `
+      <section class="hero">
+        <div class="hero__card">
+          <div class="hero__badge">Lace Patterns</div>
+          <p class="hero__metric">Textile swatches</p>
+          <p class="hero__desc">Browse the lace motifs currently available for custom gown work.</p>
+          <p class="hero__desc">Use this board to compare pattern style, texture direction, and bridal vibe.</p>
         </div>
       </section>
     `;
@@ -108,9 +122,10 @@ const getHeroHTML = () => {
 };
 
 const getSectionControlsHTML = () => {
-  if (state.currentSection === "ideas") {
+  if (state.currentSection !== "catalog") {
+    const summaryLabel = state.currentSection === "ideas" ? "gown inspo summary" : "lace patterns summary";
     return `
-      <section class="filters" aria-label="ideas summary">
+      <section class="filters" aria-label="${summaryLabel}">
         <div class="meta" id="result-meta"></div>
       </section>
     `;
@@ -133,6 +148,7 @@ const getSectionControlsHTML = () => {
 const renderLayout = () => {
   const catalogIsActive = state.currentSection === "catalog";
   const ideasIsActive = state.currentSection === "ideas";
+  const laceIsActive = state.currentSection === "lacePatterns";
 
   app.innerHTML = `
     <main class="page">
@@ -142,7 +158,8 @@ const renderLayout = () => {
 
       <section class="section-switcher" aria-label="sections">
         <button class="section-tab ${catalogIsActive ? "active" : ""}" data-section="catalog" aria-pressed="${catalogIsActive}">Catalog</button>
-        <button class="section-tab ${ideasIsActive ? "active" : ""}" data-section="ideas" aria-pressed="${ideasIsActive}">Ideas</button>
+        <button class="section-tab ${ideasIsActive ? "active" : ""}" data-section="ideas" aria-pressed="${ideasIsActive}">Gown Inspo</button>
+        <button class="section-tab ${laceIsActive ? "active" : ""}" data-section="lacePatterns" aria-pressed="${laceIsActive}">Lace Patterns</button>
       </section>
 
       ${getHeroHTML()}
@@ -172,6 +189,7 @@ const applyFilters = (items) => {
 
 const getActiveItems = () => {
   if (state.currentSection === "ideas") return state.ideas;
+  if (state.currentSection === "lacePatterns") return state.lacePatterns;
   return applyFilters(state.dresses);
 };
 
@@ -182,13 +200,21 @@ const renderGrid = () => {
 
   if (!gridEl || !metaEl) return;
 
-  metaEl.textContent = `${list.length} style${list.length === 1 ? "" : "s"} shown`;
+  const labelBySection = {
+    catalog: "style",
+    ideas: "concept",
+    lacePatterns: "pattern"
+  };
+  const itemLabel = labelBySection[state.currentSection] || "item";
+  metaEl.textContent = `${list.length} ${itemLabel}${list.length === 1 ? "" : "s"} shown`;
 
   if (list.length === 0) {
     const emptyMessage =
       state.currentSection === "ideas"
-        ? "No ideas yet. Add a few concept pieces to start this board."
-        : "No dresses match these filters yet. Try toggling another option.";
+        ? "No gown inspo yet. Add a few concept pieces to start this board."
+        : state.currentSection === "lacePatterns"
+          ? "No lace patterns yet. Add available swatches to this board."
+          : "No dresses match these filters yet. Try toggling another option.";
     gridEl.innerHTML = `<p class="empty">${emptyMessage}</p>`;
     return;
   }
@@ -213,6 +239,11 @@ const renderGrid = () => {
       if (item.tags?.length) {
         badgeRow.appendChild(tag(item.tags[0], "outline"));
       }
+    } else if (item.type === "lacePattern") {
+      badgeRow.appendChild(tag("Lace Pattern", "soft"));
+      if (item.tags?.length) {
+        badgeRow.appendChild(tag(item.tags[0], "outline"));
+      }
     } else {
       if (item.readyToWear) badgeRow.appendChild(tag("Ready to wear", "soft"));
       if (item.madeToOrder) badgeRow.appendChild(tag("Made to order", "soft"));
@@ -234,6 +265,8 @@ const renderGrid = () => {
     line.className = "card__price";
     if (item.type === "idea") {
       line.textContent = "Design idea in development";
+    } else if (item.type === "lacePattern") {
+      line.textContent = "Pattern swatch available";
     } else {
       line.textContent = getPriceDisplay(item).value;
     }
@@ -328,6 +361,14 @@ const renderDetail = () => {
   if (!item) return;
 
   const isIdea = item.type === "idea";
+  const isLacePattern = item.type === "lacePattern";
+
+  const backLabelBySection = {
+    catalog: "\u2190 Back to catalog",
+    ideas: "\u2190 Back to gown inspo",
+    lacePatterns: "\u2190 Back to lace patterns"
+  };
+  const backLabel = backLabelBySection[state.currentSection] || "\u2190 Back";
 
   app.innerHTML = `
     <main class="page">
@@ -336,7 +377,7 @@ const renderDetail = () => {
       </header>
 
       <div class="detail-container">
-        <button class="back-btn" id="back-btn">${state.currentSection === "ideas" ? "\u2190 Back to ideas" : "\u2190 Back to catalog"}</button>
+        <button class="back-btn" id="back-btn">${backLabel}</button>
 
         <div class="detail-content">
           <div class="detail-gallery">
@@ -365,6 +406,8 @@ const renderDetail = () => {
               ${
                 isIdea
                   ? `<span class="pill soft">Concept</span>`
+                  : isLacePattern
+                    ? `<span class="pill soft">Lace Pattern</span>`
                   : `${item.readyToWear ? `<span class="pill soft">Ready to wear</span>` : ""}
                      ${item.madeToOrder ? `<span class="pill soft">Made to order</span>` : ""}
                      ${item.forSale ? `<span class="pill outline">For sale</span>` : ""}
@@ -401,7 +444,7 @@ const renderDetail = () => {
   if (priceDisplayEl) {
     const priceDisplay = getPriceDisplay(item);
     if (priceDisplay.type === "none") {
-      priceDisplayEl.textContent = "Design idea in development";
+      priceDisplayEl.textContent = isLacePattern ? "Pattern swatch available" : "Design idea in development";
       priceDisplayEl.className = "detail-price-message";
     } else {
       priceDisplayEl.textContent = priceDisplay.value;
@@ -521,13 +564,29 @@ const loadIdeas = async () => {
       ? data.ideas.map((idea) => ({ ...idea, type: "idea" }))
       : [];
   } catch (err) {
-    console.warn("Using fallback ideas", err);
+    console.warn("Using fallback gown inspo", err);
     state.ideas = [];
   }
 };
 
+const loadLacePatterns = async () => {
+  const timestamp = new Date().getTime();
+  const url = `${import.meta.env.BASE_URL || ""}lace-patterns-data.json?t=${timestamp}`;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    state.lacePatterns = Array.isArray(data?.patterns)
+      ? data.patterns.map((pattern) => ({ ...pattern, type: "lacePattern" }))
+      : [];
+  } catch (err) {
+    console.warn("Using fallback lace patterns", err);
+    state.lacePatterns = [];
+  }
+};
+
 const init = async () => {
-  await Promise.all([loadCatalog(), loadIdeas()]);
+  await Promise.all([loadCatalog(), loadIdeas(), loadLacePatterns()]);
   renderLayout();
   setupSectionTabs();
   setupFilters();

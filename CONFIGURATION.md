@@ -3,7 +3,11 @@
 ## Overview
 - **Purpose:** Simple, static bridal dress catalog
 - **Hosting:** GitHub Pages (serves from `docs/`)
-- **Data source:** `public/catalog-data.json` generated from `public/catalog/`
+- **Sections:** `Catalog`, `Gown Inspo`, `Lace Patterns`
+- **Data sources:**
+  - `public/catalog-data.json` (generated from `public/catalog/`)
+  - `public/ideas-data.json` (manual data file)
+  - `public/lace-patterns-data.json` (manual data file)
 - **No admin panel, no local database** – purely static for catalog viewing
 
 ## How to Add or Update Dresses
@@ -80,9 +84,9 @@ All fields are optional (defaults are used if missing):
 ## Deploying to GitHub Pages
 
 1. Ensure GitHub Pages is set to serve from `main` branch, `docs/` folder
-2. After adding/editing dresses:
+2. After adding/editing content:
    ```bash
-   npm run generate && npm run build
+  npm run build
    ```
 3. Commit and push:
    ```bash
@@ -94,7 +98,35 @@ All fields are optional (defaults are used if missing):
 
 ## Cache Busting
 
-The app fetches `catalog-data.json` with a timestamp query parameter (`?t=...`) to avoid stale caches. This ensures users always see the latest catalog after a push.
+The app fetches JSON files with a timestamp query parameter (`?t=...`) to avoid stale caches. This ensures users always see the latest data after a push.
+
+## Managing Gown Inspo
+
+Edit `public/ideas-data.json` and add entries under `ideas`.
+
+Each entry should include:
+- `slug`
+- `name`
+- `description.short` and optional `description.full` (HTML allowed)
+- `images` array
+- `cover`
+- optional `tags`
+
+Example image path: `ideas/idea-soft-romantic.svg`
+
+## Managing Lace Patterns
+
+Edit `public/lace-patterns-data.json` and add entries under `patterns`.
+
+Each entry should include:
+- `slug`
+- `name`
+- `description.short` and optional `description.full` (HTML allowed)
+- `images` array
+- `cover`
+- optional `tags`
+
+Example image path: `lace-patterns/floral-vine-lace.svg`
 
 ## Folder Structure Example
 
@@ -126,7 +158,7 @@ public/catalog/
 
 **Catalog not updating after push:**
 - Run `npm run generate` to rebuild `catalog-data.json`
-- Run `npm run build` to update `docs/`
+- Run `npm run build` to update `docs/` (also runs `generate` automatically)
 - Hard refresh browser (Ctrl+Shift+R or Cmd+Shift+R) if needed
 
 **Images not showing:**

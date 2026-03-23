@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" role="img" aria-label="Geometric Chantilly Lace pattern swatch">
+  <defs>
+    <pattern id="geo-mesh" width="84" height="84" patternUnits="userSpaceOnUse">
+      <rect width="84" height="84" fill="#f8f6f3" />
+      <path d="M0 42h84M42 0v84" stroke="#d3b18f" stroke-width="1.5" opacity="0.4" />
+      <path d="M0 0l84 84M84 0L0 84" stroke="#c59a6d" stroke-width="1.2" opacity="0.25" />
+      <circle cx="42" cy="42" r="5" fill="#f3e8dd" stroke="#c59a6d" stroke-width="1.2" />
+      <circle cx="0" cy="0" r="3" fill="#f3e8dd" stroke="#d3b18f" stroke-width="1" />
+      <circle cx="84" cy="0" r="3" fill="#f3e8dd" stroke="#d3b18f" stroke-width="1" />
+      <circle cx="0" cy="84" r="3" fill="#f3e8dd" stroke="#d3b18f" stroke-width="1" />
+      <circle cx="84" cy="84" r="3" fill="#f3e8dd" stroke="#d3b18f" stroke-width="1" />
+    </pattern>
+  </defs>
+  <rect width="1200" height="1500" fill="url(#geo-mesh)" />
+  <rect x="80" y="80" width="1040" height="1340" rx="34" fill="none" stroke="#c59a6d" stroke-width="8" opacity="0.7" />
+</svg>
