@@ -5,6 +5,19 @@ export default defineConfig({
   base: "./",
   build: {
     outDir: "docs",
-    emptyOutDir: true
+    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        // Keep filenames stable so GitHub Pages clients don't break on stale cache.
+        entryFileNames: "assets/app.js",
+        chunkFileNames: "assets/chunk-[name].js",
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name && assetInfo.name.endsWith(".css")) {
+            return "assets/app.css";
+          }
+          return "assets/[name][extname]";
+        }
+      }
+    }
   }
 });
