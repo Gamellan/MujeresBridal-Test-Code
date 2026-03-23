@@ -135,6 +135,6 @@ public/catalog/
 - Check file paths in `meta.json` if using custom URLs
 
 **Want to preview locally:**
-- Run `npm run dev` and open http://localhost:5173/MujeresBridal
+- Run `npm run dev` and open http://localhost:5173/
 - Or run `npm run build` then open `docs/index.html` in a browser
 

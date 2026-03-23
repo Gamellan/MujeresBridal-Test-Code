@@ -25,12 +25,11 @@ Simple, elegant bridal dress catalog for Mujeres Bridal. Built with Vite (vanill
    ```bash
    npm run dev
    ```
-   Open http://localhost:5173/MujeresBridal
+   Open http://localhost:5173/
 
 5. **Build and deploy:**
    ```bash
    npm run build
-   npm run generate
    ```
    Commit and push. GitHub Pages auto-deploys.
 
@@ -48,7 +47,7 @@ Auto-regenerates `public/catalog-data.json` whenever you add/edit images or meta
 ```bash
 npm run dev
 ```
-Hot-reload at http://localhost:5173/MujeresBridal
+Hot-reload at http://localhost:5173/
 
 Now you can:
 - Add/edit images in `public/catalog/` folders
@@ -134,7 +133,7 @@ npm run watch        # Watch public/catalog and auto-regenerate
 1. Ensure repo settings → Pages → Branch: `main`, Folder: `docs/`
 2. When ready to deploy:
    ```bash
-   npm run generate && npm run build
+   npm run build
    git add -A && git commit -m "Update catalog" && git push
    ```
 3. Pages auto-deploys within ~1 minute
@@ -179,7 +178,7 @@ Perfect for a bridal aesthetic.
 - Optimize large images (>2MB per image)
 
 **Want to preview without pushing:**
-- Run `npm run dev` then open http://localhost:5173/MujeresBridal
+- Run `npm run dev` then open http://localhost:5173/
 - Or build locally: `npm run build` then open `docs/index.html`
 
 ## Project Structure

@@ -9,5 +9,5 @@ export const ADMIN_PASSWORD = "your_admin_password";
 // Create your own token at: https://github.com/settings/tokens
 // Token permissions needed: repo (full control of private repositories)
 export const GITHUB_TOKEN = "your_github_token";
-export const GITHUB_REPO = "Gamellan/MujeresBridal";
+export const GITHUB_REPO = "Gamellan/MujeresBridal-Test-Code";
 export const GITHUB_BRANCH = "main";

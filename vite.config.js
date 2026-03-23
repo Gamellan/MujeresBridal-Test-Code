@@ -1,8 +1,8 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  // GitHub Pages needs the repo name as the base path
-  base: "/MujeresBridal/",
+  // Use relative asset paths so the site works in any GitHub Pages repo name.
+  base: "./",
   build: {
     outDir: "docs",
     emptyOutDir: true

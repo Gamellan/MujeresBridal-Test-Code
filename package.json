@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "npm run generate",
     "build": "vite build",
     "preview": "vite preview",
     "generate": "node scripts/generate-catalog.js",
